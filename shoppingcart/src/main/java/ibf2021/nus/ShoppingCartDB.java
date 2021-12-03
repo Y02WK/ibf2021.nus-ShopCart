@@ -43,6 +43,10 @@ public class ShoppingCartDB {
     private void validateAndCreateDB() throws IOException {
         if (!this.userDB.exists()) {
             this.userDB.createNewFile();
+            System.out.println("User not found. Created a new login for user.");
+        } else {
+            System.out.println("User found. Login successful.");
         }
+        return;
     }
 }

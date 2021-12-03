@@ -11,7 +11,7 @@ public class shopCart {
     private ArrayList<String> alist = new ArrayList<>();
     private Set<String> set = new HashSet<>();
 
-    void openShop() {
+    public void openShop() {
         /**
          * Prints a welcome message and starts the input process
          */

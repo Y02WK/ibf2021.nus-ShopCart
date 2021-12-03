@@ -75,6 +75,9 @@ public class ShoppingCart {
             case "users":
                 dbOperations.users();
                 break;
+            case "save":
+                dbOperations.save(this.alist);
+                break;
             case "quit":
                 scan.close();
                 System.out.println("Bye bye");

@@ -1,6 +1,7 @@
 package ibf2021.nus;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -45,14 +46,27 @@ public class ShoppingCartDB {
                 alist.add(item);
                 set.add(item);
             }
+            reader.close();
         } catch (IOException e) {
             System.err.println(e);
         }
-        
+        this.login = true;
     }
  
     protected void save(ArrayList<String> cart) {
-        
+        try {
+            BufferedWriter writer = Files.newBufferedWriter(this.userDB.toPath());
+            writer.flush();
+            for (String item: cart) {
+                System.out.println(item);
+                writer.write(item);
+                writer.newLine();
+            }
+            writer.close();
+            System.out.println("Cart saved!");
+        } catch (IOException e) {
+            System.err.println(e);
+        }
     }
 
     protected void users() {
@@ -79,7 +93,6 @@ public class ShoppingCartDB {
         } else {
             System.out.println("User found. Login successful.");
         }
-        this.login = true;
         return;
     }
 }

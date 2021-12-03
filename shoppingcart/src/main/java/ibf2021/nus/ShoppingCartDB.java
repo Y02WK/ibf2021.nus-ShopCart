@@ -1,12 +1,14 @@
 package ibf2021.nus;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 
 public class ShoppingCartDB {
 
     // Private attribute containing the directory for the database.
-    private File dbDir = Path.of("./db").toFile();;
+    private File dbDir = Path.of("./db").toFile();
+    private File userDB;
 
     public ShoppingCartDB() {
         validateAndCreateDirectory();
@@ -17,7 +19,15 @@ public class ShoppingCartDB {
         validateAndCreateDirectory();
     }
 
-    private void login(String username) {}
+    protected void login(String username) {
+        String dbFile = dbDir.getAbsolutePath() + "/" + username + ".db";
+        this.userDB = Path.of(dbFile).toFile();
+        try {
+            validateAndCreateDB();
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+    }
 
     private void save() {}
 
@@ -28,5 +38,11 @@ public class ShoppingCartDB {
             this.dbDir.mkdir();
         }
         return;
+    }
+
+    private void validateAndCreateDB() throws IOException {
+        if (!this.userDB.exists()) {
+            this.userDB.createNewFile();
+        }
     }
 }

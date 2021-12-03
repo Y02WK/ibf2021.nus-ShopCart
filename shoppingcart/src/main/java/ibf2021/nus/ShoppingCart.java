@@ -68,6 +68,10 @@ public class ShoppingCart {
                 }
                 this.deleteFromCart(index);
                 break;
+            case "login":
+                String username = scan.next().trim();
+                dbOperations.login(username);
+                break;
             case "quit":
                 scan.close();
                 System.out.println("Bye bye");

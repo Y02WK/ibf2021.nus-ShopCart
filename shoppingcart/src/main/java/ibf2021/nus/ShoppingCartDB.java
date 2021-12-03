@@ -31,7 +31,11 @@ public class ShoppingCartDB {
 
     private void save() {}
 
-    private void users() {}
+    protected void users() {
+        for (File user: dbDir.listFiles()) {
+            System.out.println(user.getName());
+        }
+    }
 
     private void validateAndCreateDirectory() {
         if (!this.dbDir.exists()) {

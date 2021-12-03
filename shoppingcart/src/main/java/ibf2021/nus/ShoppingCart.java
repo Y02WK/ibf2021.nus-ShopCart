@@ -72,6 +72,9 @@ public class ShoppingCart {
                 String username = scan.next().trim();
                 dbOperations.login(username);
                 break;
+            case "users":
+                dbOperations.users();
+                break;
             case "quit":
                 scan.close();
                 System.out.println("Bye bye");

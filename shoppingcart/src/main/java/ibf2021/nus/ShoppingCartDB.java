@@ -54,6 +54,10 @@ public class ShoppingCartDB {
     }
  
     protected void save(ArrayList<String> cart) {
+        if (userDB == null) {
+            System.out.println("Error. User not logged in. Please login using 'login your_username'.");
+            return;
+        }
         try {
             BufferedWriter writer = Files.newBufferedWriter(this.userDB.toPath());
             writer.flush();

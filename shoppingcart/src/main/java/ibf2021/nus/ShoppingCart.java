@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Scanner;
-import java.io.Console;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class ShoppingCart {
 
@@ -20,15 +23,21 @@ public class ShoppingCart {
 
     }
 
-    public void openShop() {
+    public void openShop(InputStream inputStream) {
         /**
          * Prints a welcome message and starts the input process
          */
-        System.out.println("Welcome to your shopping cart");
-        while (true) {
-            String input = this.getInput();
-            if (!this.processInput(input)) {
-                return;
+
+        // Case for testing purposes. No welcome message for testing.
+        if (inputStream != System.in) {
+            this.testInput(inputStream);
+        } else {
+            System.out.println("Welcome to your shopping cart");
+            while (true) {
+                String input = this.getInput(System.in);
+                if (!this.processInput(input)) {
+                    return;
+                }
             }
         }
     }
@@ -89,14 +98,23 @@ public class ShoppingCart {
         return true;
     }
 
-    private String getInput() {
+    private String getInput(InputStream inputStream) {
         /**
         * Gets input from the console and returns it as a String
         * @return String input
         */
-        Console console = System.console();
-        String input = console.readLine();
+        String input = "";
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+        try {
+            input = br.readLine();
+            return input;
+        } catch (IOException e) {
+            System.err.println(e);
+        }
         return input;
+        // Console console = System.console();
+        // String input = console.readLine();
+        // return input;
     }
 
     private void addToCart(String item) {
@@ -150,4 +168,12 @@ public class ShoppingCart {
         }
     }
 
+    private void testInput(InputStream inputStream) {
+        String input = this.getInput(inputStream);
+        this.processInput(input);
+    }
+
+    public ArrayList<String> getCart() {
+        return this.alist;
+    }
 }

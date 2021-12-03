@@ -8,6 +8,6 @@ public class App {
         }
 
         ShoppingCart shop = new ShoppingCart(userDB);
-        shop.openShop();
+        shop.openShop(System.in);
     }
 }

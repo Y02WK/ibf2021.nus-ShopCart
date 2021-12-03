@@ -70,7 +70,7 @@ public class ShoppingCart {
                 break;
             case "login":
                 String username = scan.next().trim();
-                dbOperations.login(username);
+                dbOperations.login(username, this.alist, this.set);
                 break;
             case "users":
                 dbOperations.users();
@@ -134,13 +134,13 @@ public class ShoppingCart {
         /** 
          * Prints the list of items in the cart
          */
-        if (this.set.size() == 0) {
+        if (this.alist.size() == 0) {
             System.out.println("Your cart is empty");
             return;
         } 
         else {
             // O(n) time complexity
-            for (int i = 0; i < this.set.size(); i++) {
+            for (int i = 0; i < this.alist.size(); i++) {
                 System.out.printf("%d. %s\n", i+1, this.alist.get(i));
             }
             return;

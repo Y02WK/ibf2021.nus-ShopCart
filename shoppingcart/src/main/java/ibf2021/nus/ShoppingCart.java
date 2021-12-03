@@ -6,10 +6,19 @@ import java.util.Set;
 import java.util.Scanner;
 import java.io.Console;
 
-public class shopCart {
+public class ShoppingCart {
 
     private ArrayList<String> alist = new ArrayList<>();
     private Set<String> set = new HashSet<>();
+    private ShoppingCartDB dbOperations;
+
+    public ShoppingCart(String userDB) {
+        if (!userDB.isBlank())
+            this.dbOperations = new ShoppingCartDB(userDB);
+        else
+            this.dbOperations = new ShoppingCartDB();
+
+    }
 
     public void openShop() {
         /**

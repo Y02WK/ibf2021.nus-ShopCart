@@ -5,10 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>ibf2021.nus</groupId>
-  <artifactId>shopcartdemo</artifactId>
+  <artifactId>shoppingcart</artifactId>
   <version>0.1</version>
 
-  <name>shopcartdemo</name>
+  <name>shoppingcart</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -51,6 +51,14 @@
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.0.2</version>
+          <configuration>
+            <archive>
+                <index>true</index>
+                <manifest>
+                    <mainClass>ibf2021.nus.App</mainClass>
+                </manifest>
+            </archive>
+        </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>

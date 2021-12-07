@@ -21,7 +21,7 @@ public class ShoppingCartDB {
     };
 
     public ShoppingCartDB(String dirName) {
-        this.dbDir = Path.of("./" + dirName).toFile();
+        this.dbDir = Path.of(dirName).toFile();
         validateAndCreateDirectory();
     }
 

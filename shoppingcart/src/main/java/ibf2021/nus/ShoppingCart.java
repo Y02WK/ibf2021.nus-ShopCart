@@ -1,13 +1,13 @@
 package ibf2021.nus;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
 
 public class ShoppingCart {
 
@@ -44,9 +44,9 @@ public class ShoppingCart {
 
     private boolean processInput(String input) {
         /**
-        @param String input
-        @return false if cmd is "quit", else returns true
-        */
+         * @param String input
+         * @return false if cmd is "quit", else returns true
+         */
         if (input.isBlank()) {
             System.err.println("Input cannot be blank.");
             return true;
@@ -70,8 +70,7 @@ public class ShoppingCart {
                 int index;
                 try {
                     index = Integer.parseInt(scan.next().trim()) - 1;
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     System.out.println("Error. Please enter only numerical inputs for the index.");
                     break;
                 }
@@ -79,6 +78,10 @@ public class ShoppingCart {
                 break;
             case "login":
                 String username = scan.next().trim();
+                if (username.isBlank()) {
+                    System.out.println("Username cannot be blank");
+                    break;
+                }
                 dbOperations.login(username, this.alist, this.set);
                 break;
             case "users":
@@ -100,9 +103,10 @@ public class ShoppingCart {
 
     private String getInput(InputStream inputStream) {
         /**
-        * Gets input from the console and returns it as a String
-        * @return String input
-        */
+         * Gets input from the console and returns it as a String
+         * 
+         * @return String input
+         */
         String input = "";
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
         try {
@@ -112,19 +116,17 @@ public class ShoppingCart {
             System.err.println(e);
         }
         return input;
-        // Console console = System.console();
-        // String input = console.readLine();
-        // return input;
     }
 
     private void addToCart(String item) {
-        /** 
-        * Method to add item to cart. 
-        * O(1) time complexity. Uses a set to check if item is already in cart 
-        * rather than iterating through the ArrayList, which will be O(n).
-        * @params a String item
-        */ 
-        
+        /**
+         * Method to add item to cart.
+         * O(1) time complexity. Uses a set to check if item is already in cart
+         * rather than iterating through the ArrayList, which will be O(n).
+         * 
+         * @params a String item
+         */
+
         // Check if item already added to cart using the set
         if (this.set.add(item.toLowerCase())) {
             this.alist.add(item);
@@ -139,30 +141,29 @@ public class ShoppingCart {
     private void deleteFromCart(int index) {
         /**
          * Deletes an item from the cart
-         * @params an int index containing the index to remove 
+         * 
+         * @params an int index containing the index to remove
          */
         if (index < this.set.size() && index >= 0) {
             String item = this.alist.remove(index);
             this.set.remove(item);
             System.out.printf("%s removed from cart\n", item);
-        } 
-        else {
+        } else {
             System.err.println("Incorrect item index");
         }
     }
 
     private void printItems() {
-        /** 
+        /**
          * Prints the list of items in the cart
          */
         if (this.alist.size() == 0) {
             System.out.println("Your cart is empty");
             return;
-        } 
-        else {
+        } else {
             // O(n) time complexity
             for (int i = 0; i < this.alist.size(); i++) {
-                System.out.printf("%d. %s\n", i+1, this.alist.get(i));
+                System.out.printf("%d. %s\n", i + 1, this.alist.get(i));
             }
             return;
         }

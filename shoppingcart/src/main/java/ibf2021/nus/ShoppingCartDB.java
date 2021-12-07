@@ -12,7 +12,7 @@ import java.util.Set;
 public class ShoppingCartDB {
 
     // Private attribute containing the directory for the database.
-    private File dbDir = Path.of("./db").toFile();
+    private File dbDir = Path.of("db").toFile();
     private File userDB;
     private boolean login = false;
 
@@ -35,14 +35,15 @@ public class ShoppingCartDB {
     private void loadUserCart(ArrayList<String> alist, Set<String> set) {
         String item;
 
-        // If already logged in, clear the cart before populating the cart with the items in the db 
+        // If already logged in, clear the cart before populating the cart with the
+        // items in the db
         if (login) {
             alist.clear();
             set.clear();
         }
         try {
             BufferedReader reader = Files.newBufferedReader(this.userDB.toPath());
-            while ((item=reader.readLine()) != null) {
+            while ((item = reader.readLine()) != null) {
                 alist.add(item);
                 set.add(item);
             }
@@ -52,7 +53,7 @@ public class ShoppingCartDB {
         }
         this.login = true;
     }
- 
+
     protected void save(ArrayList<String> cart) {
         if (userDB == null) {
             System.out.println("Error. User not logged in. Please login using 'login your_username'.");
@@ -61,7 +62,7 @@ public class ShoppingCartDB {
         try {
             BufferedWriter writer = Files.newBufferedWriter(this.userDB.toPath());
             writer.flush();
-            for (String item: cart) {
+            for (String item : cart) {
                 System.out.println(item);
                 writer.write(item);
                 writer.newLine();
@@ -74,7 +75,7 @@ public class ShoppingCartDB {
     }
 
     protected void users() {
-        for (File user: this.dbDir.listFiles()) {
+        for (File user : this.dbDir.listFiles()) {
             System.out.println(user.getName());
         }
     }

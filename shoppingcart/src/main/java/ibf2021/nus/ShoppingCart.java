@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -77,13 +78,14 @@ public class ShoppingCart {
                 this.deleteFromCart(index);
                 break;
             case "login":
-                String username = scan.next().trim().replaceAll(" ", "_");
-                if (username.isBlank()) {
+                try {
+                    String username = scan.next().trim().replaceAll(" ", "_");
+                    dbOperations.login(username, this.alist, this.set);
+                    break;
+                } catch (NoSuchElementException e) {
                     System.out.println("Username cannot be blank");
                     break;
                 }
-                dbOperations.login(username, this.alist, this.set);
-                break;
             case "users":
                 dbOperations.users();
                 break;

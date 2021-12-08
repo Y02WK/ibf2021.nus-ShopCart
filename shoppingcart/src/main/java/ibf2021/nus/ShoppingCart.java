@@ -77,7 +77,7 @@ public class ShoppingCart {
                 this.deleteFromCart(index);
                 break;
             case "login":
-                String username = scan.next().trim();
+                String username = scan.next().trim().replaceAll(" ", "_");
                 if (username.isBlank()) {
                     System.out.println("Username cannot be blank");
                     break;
@@ -120,9 +120,9 @@ public class ShoppingCart {
 
     private void addToCart(String item) {
         /**
-         * Method to add item to cart.
-         * O(1) time complexity. Uses a set to check if item is already in cart
-         * rather than iterating through the ArrayList, which will be O(n).
+         * Method to add item to cart. O(1) time complexity. Uses a set to check if item
+         * is already
+         * in cart rather than iterating through the ArrayList, which will be O(n).
          * 
          * @params a String item
          */

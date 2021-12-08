@@ -65,7 +65,6 @@ public class ShoppingCartDB {
             BufferedWriter writer = Files.newBufferedWriter(this.userDB.toPath());
             writer.flush();
             for (String item : cart) {
-                System.out.println(item);
                 writer.write(item);
                 writer.newLine();
             }
@@ -78,8 +77,13 @@ public class ShoppingCartDB {
     }
 
     protected void users() {
-        for (File user : this.dbDir.listFiles()) {
-            System.out.println(user.getName());
+        File[] users = this.dbDir.listFiles();
+        if (users.length == 0) {
+            System.out.println("No users in database.");
+        } else {
+            for (File file : users) {
+                System.out.println(file.getName().replaceAll(".db", ""));
+            }
         }
         return;
     }

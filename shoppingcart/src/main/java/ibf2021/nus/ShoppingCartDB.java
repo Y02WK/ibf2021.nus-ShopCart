@@ -26,10 +26,11 @@ public class ShoppingCartDB {
     }
 
     protected void login(String username, ArrayList<String> alist, Set<String> set) {
-        String dbFile = dbDir.getAbsolutePath() + "/" + username + ".db";
+        String dbFile = this.dbDir.getAbsolutePath() + "/" + username + ".db";
         this.userDB = Path.of(dbFile).toFile();
         this.validateAndCreateDB();
         this.loadUserCart(alist, set);
+        return;
     }
 
     private void loadUserCart(ArrayList<String> alist, Set<String> set) {
@@ -37,7 +38,7 @@ public class ShoppingCartDB {
 
         // If already logged in, clear the cart before populating the cart with the
         // items in the db
-        if (login) {
+        if (this.login) {
             alist.clear();
             set.clear();
         }
@@ -52,10 +53,11 @@ public class ShoppingCartDB {
             System.err.println(e);
         }
         this.login = true;
+        return;
     }
 
     protected void save(ArrayList<String> cart) {
-        if (userDB == null) {
+        if (this.userDB == null) {
             System.out.println("Error. User not logged in. Please login using 'login your_username'.");
             return;
         }
@@ -72,12 +74,14 @@ public class ShoppingCartDB {
         } catch (IOException e) {
             System.err.println(e);
         }
+        return;
     }
 
     protected void users() {
         for (File user : this.dbDir.listFiles()) {
             System.out.println(user.getName());
         }
+        return;
     }
 
     private void validateAndCreateDirectory() {

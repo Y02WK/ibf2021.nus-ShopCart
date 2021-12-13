@@ -6,13 +6,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.Set;
 
 public class ShoppingCart {
 
-    private ArrayList<String> alist = new ArrayList<>();
+    private List<String> alist = new ArrayList<>();
     private Set<String> set = new HashSet<>();
     private ShoppingCartDB dbOperations;
 
@@ -124,7 +125,7 @@ public class ShoppingCart {
         /**
          * Method to add item to cart. O(1) time complexity. Uses a set to check if item
          * is already
-         * in cart rather than iterating through the ArrayList, which will be O(n).
+         * in cart rather than iterating through the List.
          * 
          * @params a String item
          */
@@ -176,7 +177,7 @@ public class ShoppingCart {
         this.processInput(input);
     }
 
-    public ArrayList<String> getCart() {
+    public List<String> getCart() {
         return this.alist;
     }
 }

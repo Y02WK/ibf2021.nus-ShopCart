@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class ShoppingCartDB {
@@ -25,7 +25,7 @@ public class ShoppingCartDB {
         validateAndCreateDirectory();
     }
 
-    protected void login(String username, ArrayList<String> alist, Set<String> set) {
+    protected void login(String username, List<String> alist, Set<String> set) {
         String dbFile = this.dbDir.getAbsolutePath() + "/" + username + ".db";
         this.userDB = Path.of(dbFile).toFile();
         this.validateAndCreateDB();
@@ -33,7 +33,7 @@ public class ShoppingCartDB {
         return;
     }
 
-    private void loadUserCart(ArrayList<String> alist, Set<String> set) {
+    private void loadUserCart(List<String> alist, Set<String> set) {
         String item;
 
         // If already logged in, clear the cart before populating the cart with the
@@ -56,7 +56,7 @@ public class ShoppingCartDB {
         return;
     }
 
-    protected void save(ArrayList<String> cart) {
+    protected void save(List<String> alist) {
         if (this.userDB == null) {
             System.out.println("Error. User not logged in. Please login using 'login your_username'.");
             return;
@@ -64,7 +64,7 @@ public class ShoppingCartDB {
         try {
             BufferedWriter writer = Files.newBufferedWriter(this.userDB.toPath());
             writer.flush();
-            for (String item : cart) {
+            for (String item : alist) {
                 writer.write(item);
                 writer.newLine();
             }

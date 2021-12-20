@@ -57,21 +57,21 @@ public class ShoppingCart {
         Scanner scan = new Scanner(input);
         String cmd = scan.next();
 
-        switch (cmd.trim().toLowerCase()) {
+        switch (cmd.strip().toLowerCase()) {
             case "list":
                 this.printItems();
                 break;
             case "add":
                 scan.useDelimiter(",");
                 while (scan.hasNext()) {
-                    String item = scan.next().trim();
+                    String item = scan.next().strip();
                     this.addToCart(item);
                 }
                 break;
             case "delete":
                 int index;
                 try {
-                    index = Integer.parseInt(scan.next().trim()) - 1;
+                    index = Integer.parseInt(scan.next().strip()) - 1;
                 } catch (Exception e) {
                     System.out.println("Error. Please enter only numerical inputs for the index.");
                     break;
@@ -80,7 +80,7 @@ public class ShoppingCart {
                 break;
             case "login":
                 try {
-                    String username = scan.next().trim().replaceAll(" ", "_");
+                    String username = scan.next().strip().replaceAll(" ", "_");
                     dbOperations.login(username, this.alist, this.set);
                     break;
                 } catch (NoSuchElementException e) {
